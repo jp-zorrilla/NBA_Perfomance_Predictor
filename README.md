@@ -43,9 +43,20 @@ El "Oráculo" ha hablado. Estas son las proyecciones para tres perfiles distinto
  -- Luka Dončić (La Superestrella): El modelo predice un ligero ajuste por eficiencia. Proyección: -1.3 PPG.
  -- Stephen Curry (La Leyenda): El factor edad empieza a pesar significativamente. Proyección: Descendente (-2.4 PPG).
 ________________________________________
-# 📈 Validación Estadística
+# 📈 Validación y Análisis Estadístico
 
-Para asegurar que el modelo es confiable, realizamos un Análisis de Residuos. La distribución de errores sigue una campana de Gauss casi perfecta centrada en cero, lo que garantiza que nuestras predicciones no tienen sesgo sistemático.
+Para asegurar la fiabilidad del modelo, realizamos un **Análisis de Residuos**. La inclusión de la **Curva de Envejecimiento** permitió capturar la naturaleza no lineal del desarrollo atlético.
+
+![Fig 1: Curva de Envejecimiento](Curva_De_Envejecimiento_En_La_NBA.png)
+
+*Fig 1. Relación entre la edad y el rendimiento proyectado.*
+
+La **distribución de errores** sigue una campana de Gauss casi perfecta centrada en cero. Esto garantiza que nuestras predicciones carecen de sesgo sistemático.
+
+![Fig 2: Histograma de Residuos](Campana_Distribucion_De_Errores.png)
+
+*Fig 2. Análisis de residuos: Error medio de 2.3 puntos.*
+
 ________________________________________
 # 🚀 Cómo usar este Repositorio
 **1. Configuración del Entorno**
