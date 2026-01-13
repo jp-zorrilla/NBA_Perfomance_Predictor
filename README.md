@@ -48,19 +48,26 @@ ________________________________________
 Para asegurar que el modelo es confiable, realizamos un Análisis de Residuos. La distribución de errores sigue una campana de Gauss casi perfecta centrada en cero, lo que garantiza que nuestras predicciones no tienen sesgo sistemático.
 ________________________________________
 # 🚀 Cómo usar este Repositorio
-Clonar y Preparar:
+**1. Configuración del Entorno**
+Se recomienda el uso de un entorno virtual para evitar conflictos de dependencias:
+```bash
+# Crear entorno
+python -m venv venv
 
--- Crear un entorno virtual (recomendado): python -m venv venv
+# Activar entorno (Mac/Linux)
+source venv/bin/activate
+# Activar entorno (Windows)
+# venv\Scripts\activate
 
--- Activar el entorno:
+# Instalar dependencias
+pip install -r requirements.txt
+```
+**2. Ejecución del Modelo**
+Abre el archivo "Predicción_rendimiento_de_jugadores_NBA.ipynb" en VS Code o Jupyter Lab.
 
-    -Windows: venv\Scripts\activate
-    -Mac/Linux: source venv/bin/activate
+Selecciona "Run All" (Ejecutar todo) para procesar el histórico de datos y entrenar el modelo final.
 
-Instalar: pip install -r requirements.txt
-
-Ejecutar: 
--- abre el archivo .ipynb y dirigete el bloque 10: predecir_jugador("nombre de jugador")
+Desplázate hasta la última celda (Sección: El Oráculo) para realizar predicciones personalizadas y escribe dentro de la función `predecir_jugador` el nombre del jugador que quieras analizas (ejemplo: Luka)
 
 ________________________________________
 # 🏁 Conclusión Final 
