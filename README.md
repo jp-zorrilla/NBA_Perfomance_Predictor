@@ -1,99 +1,88 @@
-# 🏀NBA_Perfomance_Predictor: Predicción de Rendimiento con Machine Learning
+🔄 Actualización V2 (Febrero 2026)
 
-**¿Es posible predecir el futuro de una superestrella de la NBA usando solo estadística y ciencia de datos?** 
+## Identificando Estrellas: Machine Learning y NBA 🏀🤖
+Autor: Juan Pedro Zorrilla, D.A.-D.S.
 
-Este proyecto desarrolla un motor predictivo que proyecta los Puntos por Partido (PPG) de los jugadores para la temporada 2025-26. A través de un análisis histórico de 15 años y el uso de modelos de regresión, este notebook demuestra que la parsimonia (simplicidad) y el entendimiento biológico del atleta suelen superar a los algoritmos más complejos.
+Fecha: 11 de febrero de 2026
 
-# 🎯 El Desafío: 
+Este proyecto es una evolución directa de mi primer modelo de predicción. En esta Versión 2, implementé las siguientes mejoras:
 
-El rendimiento deportivo es volátil. El reto consistió en filtrar el "ruido" de las estadísticas básicas para encontrar los verdaderos predictores del éxito.
+Pipeline Robusto: Integración de StandardScaler y RandomForestClassifier en un Pipeline de Scikit-Learn.
+Ajuste de Umbral: Reducción del umbral de decisión a 0.3 para capturar mejor a los jugadores "en la burbuja".
+Descubrimiento del "Sesgo de Eficiencia": Se detectó y documentó cómo el modelo evalúa a los jugadores de alto uso (High Usage Rate) vs. alta eficiencia.
 
-**Pregunta clave: ¿Puede un modelo simple de Regresión Lineal vencer a un Random Forest al incorporar la "Curva de Envejecimiento" de los jugadores?**
-________________________________________
+
+# 📋 Resumen del Proyecto
+Este proyecto desarrolla un sistema de auditoría predictiva para las selecciones del NBA All-Star. Utilizando técnicas de Machine Learning, el modelo evalúa el rendimiento de los jugadores entre las temporadas 2014 y 2024 para determinar quién merece ser una "estrella" basándose exclusivamente en métricas de impacto y eficiencia, eliminando sesgos de popularidad o narrativa mediática.
+
+__________________________________________
+# 🎯 Objetivo
+Construir un modelo de clasificación que asigne una probabilidad de All-Star a cada jugador, permitiendo identificar:
+
+- Métricas clave: Qué estadísticas separan realmente a la élite del resto.
+
+- Snubs (Omisiones): Jugadores con alto rendimiento estadístico que no fueron seleccionados.
+
+- Sesgos del Modelo: Analizar por qué ciertos perfiles de alto volumen (como bases creativos) son evaluados de forma distinta a los perfiles de alta eficiencia.
+_____________________________________________
 # 🛠️ Stack Tecnológico
+* Lenguaje: Python 3.x
 
-    -- Lenguaje: Python 3.x
-    -- Librerías: nba_api, pandas, scikit-learn, seaborn, matplotlib.
-    -- Dataset: +15 temporadas de datos oficiales de la NBA (2010-2025).
-________________________________________
-# 🧠 El "Core" del Proyecto: Hallazgos de Ingeniería de Datos
+* Bibliotecas: * nba_api: Extracción de datos en tiempo real.
 
-**1. La Curva de Envejecimiento (*The Breakthrough*)**
+* Pandas & NumPy: Procesamiento y limpieza de datos (ETL).
 
-El mayor salto en precisión ($R^2$ de 0.75 a 0.78) ocurrió al dejar de tratar la edad como una variable lineal. Implementé un Ajuste Polinomial ($Edad + Edad^2$) para modelar el ciclo de vida del atleta: el crecimiento explosivo del novato, el "prime" físico y el declive inevitable del veterano.
+* Scikit-Learn: Construcción del modelo (Random Forest) y Pipelines de preprocesamiento.
 
-**2. El Impuesto a la Eficiencia**
+* Visualización: Tableau (Dashboard interactivo).
 
-Descubrimos que el volumen de tiros (FGA) y los minutos jugados actúan como armas de doble filo. El modelo penaliza el volumen si no viene acompañado de una eficiencia real, permitiendo predecir "regresiones a la media" en jugadores con alto volumen pero baja efectividad.
-________________________________________
-# 📊 Comparativa de Modelos
-En este proyecto, la honestidad técnica es prioridad. Evaluamos dos enfoques:
+______________________________________________
+# 🧠 Metodología y Modelo
+1. Extracción y ETL
+Se recolectaron datos históricos utilizando el endpoint leaguedashplayerstats. Se realizó una limpieza profunda manejando valores nulos y filtrando jugadores con tiempo de juego poco representativo.
 
-Modelo               |R-Cuadrado(R2) |Error Medio(MAE)| Resultado
----------------------|---------------|----------------|----------------
-Regresión Lineal (V2)|     0.7797    |  2.31 pts      | Ganador
-Random Forest        |     0.7388    |  2.56 pts      | Descartado por Overfitting
------------------------------------------------------------------------
+2. Ingeniería de Características (Feature Engineering)
+Se seleccionaron métricas de Volumen (PTS, REB, AST) y de Impacto/Eficiencia (Plus-Minus, Porcentajes de tiro, Pérdidas).
 
-**Conclusión**: El modelo lineal fue más robusto. Esto demuestra que en conjuntos de datos con fuertes relaciones biológicas, los modelos interpretables suelen ser superiores a las "cajas negras" de IA.
-________________________________________
-# 🔮 Predicciones para la Temporada 2025-26
-El "Oráculo" ha hablado. Estas son las proyecciones para tres perfiles distintos:
- -- Victor Wembanyama (El Unicornio): A pesar de la regresión estadística natural, su juventud actúa como un escudo. Proyección: Estable (Mantiene ~24 PPG).
- -- Luka Dončić (La Superestrella): El modelo predice un ligero ajuste por eficiencia. Proyección: -1.3 PPG.
- -- Stephen Curry (La Leyenda): El factor edad empieza a pesar significativamente. Proyección: Descendente (-2.4 PPG).
-________________________________________
-# 📈 Validación y Análisis Estadístico
+3. El Algoritmo: Random Forest
+* Se implementó un Random Forest Classifier dentro de un Pipeline de Scikit-Learn.
 
-Para asegurar la fiabilidad del modelo, realizamos un **Análisis de Residuos**. La inclusión de la **Curva de Envejecimiento** permitió capturar la naturaleza no lineal del desarrollo atlético.
+* Balanceo de Clases: Manejo de la disparidad entre All-Stars (aprox. 24 por año) y el resto de la liga (>400 jugadores).
 
-![Fig 1: Curva de Envejecimiento](Curva_De_Envejecimiento_En_La_NBA.png)
+* Umbral de Decisión: Se ajustó el umbral de probabilidad a 0.3 para capturar con mayor precisión a los candidatos "en la burbuja".
 
-*Fig 1. Relación entre la edad y el rendimiento proyectado.*
+_________________________________________________
+# 🔍 Hallazgos Críticos: El "Sesgo de Eficiencia"
+Uno de los resultados más interesantes del modelo fue su comportamiento ante jugadores de alto uso de balón (Usage Rate):
 
-La **distribución de errores** sigue una campana de Gauss casi perfecta centrada en cero. Esto garantiza que nuestras predicciones carecen de sesgo sistemático.
+* Líderes de Probabilidad: El modelo favorece a perfiles como Jayson Tatum, Giannis Antetokounmpo y Kevin Durant, quienes combinan alto puntaje con una eficiencia defensiva y de tiro excepcional.
 
-![Fig 2: Histograma de Residuos](Campana_Distribucion_De_Errores.png)
+* La Paradoja de los Generadores: Jugadores como Nikola Jokić y Luka Dončić obtuvieron probabilidades menores a las esperadas (10% - 25%).
 
-*Fig 2. Análisis de residuos: Error medio de 2.3 puntos.*
+* Análisis: El modelo actúa como un "crítico severo" que penaliza fuertemente las pérdidas de balón (TOV) y valora el Plus-Minus neto. Esto revela que la IA prioriza la "limpieza" estadística, mientras que el voto humano valora la creatividad y el volumen de juego.
+__________________________________________
 
-________________________________________
-# 🚀 Cómo usar este Repositorio
-**1. Configuración del Entorno**
-Se recomienda el uso de un entorno virtual para evitar conflictos de dependencias:
-```bash
-# Crear entorno
-python -m venv venv
+# 📊 Visualizaciones (Tableau)
+* El análisis se complementa con una Historia en Tableau que incluye:
 
-# Activar entorno (Mac/Linux)
-source venv/bin/activate
-# Activar entorno (Windows)
-# venv\Scripts\activate
+* Scatter Plot: Relación entre volumen de puntos e impacto real en el juego.
 
-# Instalar dependencias
-pip install -r requirements.txt
-```
-**2. Ejecución del Modelo**
-Abre el archivo "Predicción_rendimiento_de_jugadores_NBA.ipynb" en VS Code o Jupyter Lab.
+* Duelo de Perfiles: Comparativa directa entre predicciones del modelo y selecciones históricas.
 
-Selecciona "Run All" (Ejecutar todo) para procesar el histórico de datos y entrenar el modelo final.
+* Heatmap de Consistencia: Seguimiento de la jerarquía de las estrellas a través de las temporadas.
 
-Desplázate hasta la última celda (Sección: El Oráculo) para realizar predicciones personalizadas y escribe dentro de la función `predecir_jugador` el nombre del jugador que quieras analizas (ejemplo: Luka)
+_______________________________________
+# 🚀 Cómo ejecutarlo
+Clona el repositorio:
 
-________________________________________
-# 🏁 Conclusión Final 
-A través de este pipeline de Data Science, se ha demostrado que el rendimiento en la NBA es altamente predecible cuando se combinan estadísticas de volumen y eficiencia con factores biológicos.
+Bash
+git clone https://github.com/tu-usuario/nba-allstar-ml.git
+Instala las dependencias:
 
-La inclusión de la Curva de Envejecimiento permitió capturar la naturaleza no lineal del desarrollo atlético, superando modelos más complejos pero menos interpretables. Con un error medio de apenas 2.3 puntos, este modelo se posiciona como una herramienta sólida para la proyección de rendimiento y la toma de decisiones basada en datos.
+Bash
+pip install pandas numpy nba_api scikit-learn
+Ejecuta el notebook NBA_v2.ipynb para generar el archivo de predicciones nba_allstar_predictions_FINAL.csv.
 
-# Futuras Mejoras
-Por ejemplo:
-
--- Agregar datos de lesiones para ajustar proyecciones.
-
--- Incluir métricas avanzadas (Advanced Stats) como PER o Win Shares.
-
---Desarrollar una interfaz web con Streamlit para que la gente use el oráculo sin ver el código
 ________________________________________
 # 👨‍💻 Autor
 Juan Pedro Zorrilla 
