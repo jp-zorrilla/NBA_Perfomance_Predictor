@@ -63,7 +63,7 @@ Uno de los resultados más interesantes del modelo fue su comportamiento ante ju
 __________________________________________
 
 # 📊 Visualizaciones (Tableau)
-* El análisis se complementa con una Historia en Tableau que incluye:
+El análisis se complementa con una Historia en Tableau que incluye:
 
 * Scatter Plot: Relación entre volumen de puntos e impacto real en el juego.
 
